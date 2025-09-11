@@ -3,90 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Ctrl+Alt+ReVendre</title>
-    <style>
-        /* Reset */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(135deg, royalblue 0%, #1a1a40 100%);
-            color: white;
-            min-height: 100vh;
-        }
-
-        /* Header avec logo centré + effet dégradé translucide */
-        header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 120px; /* hauteur fixe, plus petite que le logo */
-            background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            position: relative;
-            z-index: 1;
-        }
-        header img {
-            height: 180px; /* Logo plus grand que la bannière */
-            position: relative;
-            top: 10px; /* descend un peu le logo pour l’effet “débordant” */
-            z-index: 2;
-        }
-
-        /* Tableau stylé en "carte" */
-        .table-container {
-            width: 90%;
-            max-width: 1000px;
-            margin: 70px auto; /* espace sous le logo */
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: center;
-        }
-
-        th {
-            background: rgba(255,255,255,0.9);
-            color: royalblue;
-            font-size: 18px;
-            padding: 15px;
-        }
-
-        td {
-            padding: 15px;
-            font-size: 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        tr:hover td {
-            background: rgba(255, 255, 255, 0.1);
-            transition: 0.3s;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
-        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+    <header class="header">
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Ctrl+Alt+ReVendre" class="logo">
+        </div>
+        <div class="login-container">
+            <a href="/login" class="login-btn">Connexion</a>
+        </div>
     </header>
 
-    <div class="table-container">
-        <table>
-            <tr>
-                <th>ID</th><th>Modèle</th><th>État</th>
-            </tr>
-            {% for pc in computers %}
-            <tr>
-                <td>{{ pc.id }}</td>
-                <td>{{ pc.modele }}</td>
-                <td>{{ pc.etat }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+    <main class="content">
+        <h2>Bienvenue sur Ctrl+Alt+ReVendre</h2>
+        <p>Suivi de mes vieux ordinateurs remis à neuf 🚀</p>
+    </main>
 </body>
 </html>
