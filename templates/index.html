@@ -4,21 +4,64 @@
     <meta charset="UTF-8">
     <title>Ctrl+Alt+ReVendre</title>
     <style>
-        body { font-family: Arial, sans-serif; background: royalblue; margin: 0; }
-        header {
-            display: flex;
-            align-items: center;
-            background: white;
-            padding: 10px 20px;
-        }
-        header img {
-            height: 50px;
+        /* Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, royalblue 40%, #1a1a40 100%);
+            color: white;
+            min-height: 100vh;
         }
 
-        table { border-collapse: collapse; width: 80%; margin: 40px auto; background: royalblue; }
-        th, td { border: 1px solid white; padding: 10px; text-align: center; }
-        th { background: white; color: royalblue; }
-        td { color: white; }
+        /* Header avec logo centré */
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        header img {
+            height: 120px; /* Logo bien grand */
+        }
+
+        /* Tableau stylé en "carte" */
+        .table-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th {
+            background: white;
+            color: royalblue;
+            font-size: 18px;
+            padding: 15px;
+        }
+
+        td {
+            padding: 15px;
+            font-size: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
     </style>
 </head>
 <body>
@@ -26,17 +69,19 @@
         <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
     </header>
 
-    <table>
-        <tr>
-            <th>ID</th><th>Modèle</th><th>État</th>
-        </tr>
-        {% for pc in computers %}
-        <tr>
-            <td>{{ pc.id }}</td>
-            <td>{{ pc.modele }}</td>
-            <td>{{ pc.etat }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>ID</th><th>Modèle</th><th>État</th>
+            </tr>
+            {% for pc in computers %}
+            <tr>
+                <td>{{ pc.id }}</td>
+                <td>{{ pc.modele }}</td>
+                <td>{{ pc.etat }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 </body>
 </html>
