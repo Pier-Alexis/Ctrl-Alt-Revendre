@@ -9,23 +9,23 @@
 
         body {
             font-family: "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(135deg, royalblue 40%, #1a1a40 100%);
+            background: linear-gradient(135deg, royalblue 0%, #1a1a40 100%);
             color: white;
             min-height: 100vh;
         }
 
-        /* Header avec logo centré */
+        /* Header avec logo centré + effet dégradé translucide */
         header {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 50px 20px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
             backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
         header img {
-            height: 120px; /* Logo bien grand */
+            height: 150px; /* Logo plus gros */
         }
 
         /* Tableau stylé en "carte" */
@@ -46,7 +46,7 @@
         }
 
         th {
-            background: white;
+            background: rgba(255,255,255,0.9);
             color: royalblue;
             font-size: 18px;
             padding: 15px;
