@@ -19,20 +19,25 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 50px 20px;
+            height: 120px; /* hauteur fixe, plus petite que le logo */
             background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
         }
         header img {
-            height: 150px; /* Logo plus gros */
+            height: 180px; /* Logo plus grand que la bannière */
+            position: relative;
+            top: 10px; /* descend un peu le logo pour l’effet “débordant” */
+            z-index: 2;
         }
 
         /* Tableau stylé en "carte" */
         .table-container {
             width: 90%;
             max-width: 1000px;
-            margin: 50px auto;
+            margin: 70px auto; /* espace sous le logo */
             background: rgba(255, 255, 255, 0.05);
             border-radius: 16px;
             overflow: hidden;
