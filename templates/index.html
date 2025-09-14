@@ -3,21 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Ctrl+Alt+ReVendre</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="homepage">
     <header class="header">
-        <div class="logo-container">
+        <div class="logo-container container">
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Ctrl+Alt+ReVendre" class="logo">
         </div>
-        <div class="login-container">
+        <div style="position: absolute; right: 28px; top: 24px;">
             <a href="/login" class="login-btn">Connexion</a>
         </div>
     </header>
 
-    <main class="content">
-        <h2>Bienvenue sur Ctrl+Alt+ReVendre</h2>
-        <p>Suivi de mes vieux ordinateurs remis à neuf 🚀</p>
+    <main class="content container">
+        <h2 style="margin-top: 40px; font-size: 28px;">Bienvenue sur Ctrl+Alt+ReVendre</h2>
+        <p style="opacity:0.95; margin-top:14px; max-width:700px; margin-left:auto; margin-right:auto;">
+            Suivi de mes vieux ordinateurs remis à neuf 🚀 — rends-toi sur le tableau de bord pour gérer les machines après connexion.
+        </p>
+
+        <div style="margin-top: 36px;">
+            <a href="/login" class="btn">Accéder au panneau</a>
+        </div>
+
+        <div class="table-container" style="margin-top:48px;">
+            <div class="table-header">
+                <div>ID</div>
+                <div>Modèle</div>
+                <div>État</div>
+                <div style="text-align:right">Actions</div>
+            </div>
+
+            {% for pc in computers %}
+            <div class="table-row">
+                <div style="font-weight:700;">{{ pc.id }}</div>
+                <div>
+                    <div style="font-weight:700;">{{ pc.modele }}</div>
+                    <div style="opacity:0.85; font-size:13px;">{{ pc.composants }}</div>
+                </div>
+                <div style="font-weight:600;">{{ pc.etat }}</div>
+                <div class="row-actions">
+                    <a class="small-btn btn" href="{{ url_for('edit', pc_id=pc.id) }}">Modifier</a>
+                </div>
+            </div>
+            {% else %}
+            <div style="padding:24px; color: rgba(255,255,255,0.9)">Aucune machine pour l'instant.</div>
+            {% endfor %}
+        </div>
     </main>
 </body>
 </html>
