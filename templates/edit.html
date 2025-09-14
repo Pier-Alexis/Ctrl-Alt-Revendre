@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Modifier PC - Ctrl+Alt+ReVendre</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="otherpage">
+  <header class="header">
+    <div class="logo-container container">
+      <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="logo">
+    </div>
+    <div style="padding-right:20px;">
+      <a href="{{ url_for('logout') }}" class="login-btn">Se déconnecter</a>
+    </div>
+  </header>
+
+  <main class="content container">
+    <div class="login-box" style="max-width:720px; margin:30px auto;">
+      <h2>Modifier PC #{{ pc.id }}</h2>
+
+      <form method="POST">
+        <div style="display:flex; gap:12px; flex-direction:column;">
+          <input name="modele" value="{{ pc.modele }}" placeholder="Modèle (ex: Dell Optiplex 7010)" required>
+          <input name="composants" value="{{ pc.composants }}" placeholder="Composants (CPU, RAM, SSD...)">
+          <input name="etat" value="{{ pc.etat }}" placeholder="État (ex: Reçu / Nettoyage / Optimisation / Prêt / Vendu)">
+          <textarea name="notes" rows="4" placeholder="Notes supplémentaires">{{ pc.notes }}</textarea>
+
+          <div style="display:flex; gap:10px; justify-content:flex-end;">
+            <a href="{{ url_for('dashboard') }}" class="btn">Annuler</a>
+            <button type="submit" class="btn add-button">Sauvegarder</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
