@@ -3,22 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Connexion - Ctrl+Alt+ReVendre</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
+<body class="otherpage">
     <header class="header">
-        <div class="logo-container">
+        <div class="logo-container container">
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Ctrl+Alt+ReVendre" class="logo">
         </div>
     </header>
 
-    <main class="content">
+    <main class="content container">
         <div class="login-box">
             <h2>Connexion</h2>
-            <form method="POST">
-                <input type="text" name="username" placeholder="Nom d'utilisateur" required>
-                <input type="password" name="password" placeholder="Mot de passe" required>
-                <button type="submit">Se connecter</button>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% for cat, msg in messages %}
+                <div class="flash {{ cat }}">{{ msg }}</div>
+              {% endfor %}
+            {% endwith %}
+
+            <form method="POST" autocomplete="off">
+                <div class="form-field">
+                    <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+                </div>
+                <div class="form-field">
+                    <input type="password" name="password" placeholder="Mot de passe" required>
+                </div>
+                <div>
+                    <button class="btn add-button" type="submit">Se connecter</button>
+                </div>
             </form>
         </div>
     </main>
