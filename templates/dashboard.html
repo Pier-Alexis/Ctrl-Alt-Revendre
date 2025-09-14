@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8">
   <title>Dashboard - Ctrl+Alt+ReVendre</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="otherpage">
   <header class="header">
-    <div class="logo-container">
+    <div class="logo-container container">
       <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="logo">
     </div>
     <div style="padding-right:20px;">
@@ -15,10 +16,62 @@
     </div>
   </header>
 
-  <main class="content">
+  <main class="content container">
     <div class="table-container">
-      <h2 style="padding:20px; color: #e0f7e9">Bienvenue, {{ user }} !</h2>
-      <p style="padding-bottom:20px">Ici tu pourras ajouter/modifier les PC (on code ça juste après).</p>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        <div style="padding:16px;">
+        {% for cat, msg in messages %}
+          <div class="flash {{ cat }}">{{ msg }}</div>
+        {% endfor %}
+        </div>
+      {% endwith %}
+
+      <h2 style="padding:12px 20px; color: #e0f7e9;">Bienvenue, {{ user }} !</h2>
+      <p style="padding:0 20px 20px 20px;">Ici tu peux ajouter, modifier ou supprimer des PC.</p>
+
+      <!-- Formulaire d'ajout -->
+      <div style="padding: 0 20px 20px 20px;">
+        <form method="POST" class="login-box" style="max-width:100%;">
+            <div style="display:flex; flex-direction:column; gap:8px;">
+                <input name="modele" placeholder="Modèle (ex: Dell Optiplex 7010)" required>
+                <input name="composants" placeholder="Composants (CPU, RAM, SSD...)" >
+                <input name="etat" placeholder="État (ex: Reçu / Nettoyage / Optimisation / Prêt / Vendu)" >
+                <textarea name="notes" placeholder="Notes supplémentaires" rows="3"></textarea>
+                <div style="display:flex; gap:10px; justify-content:flex-end;">
+                    <button type="submit" class="btn add-button">Ajouter le PC</button>
+                </div>
+            </div>
+        </form>
+      </div>
+
+      <!-- Liste -->
+      <div>
+        <div class="table-header">
+            <div>ID</div>
+            <div>Modèle</div>
+            <div>État</div>
+            <div style="text-align:right">Actions</div>
+        </div>
+
+        {% for pc in computers %}
+        <div class="table-row">
+            <div style="font-weight:700;">{{ pc.id }}</div>
+            <div>
+                <div style="font-weight:700;">{{ pc.modele }}</div>
+                <div style="opacity:0.85; font-size:13px;">{{ pc.composants }}{% if pc.notes %} — {{ pc.notes }}{% endif %}</div>
+            </div>
+            <div style="font-weight:600;">{{ pc.etat }}</div>
+            <div class="row-actions">
+                <a class="small-btn btn" href="{{ url_for('edit', pc_id=pc.id) }}">Modifier</a>
+                <form method="POST" action="{{ url_for('delete', pc_id=pc.id) }}" style="display:inline;">
+                    <button class="small-btn btn" onclick="return confirm('Supprimer ce PC ?');" type="submit">Supprimer</button>
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <div style="padding:24px; color: rgba(255,255,255,0.9)">Aucune machine pour l'instant.</div>
+        {% endfor %}
+      </div>
     </div>
   </main>
 </body>
