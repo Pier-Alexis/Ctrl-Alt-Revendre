@@ -1,31 +1,35 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #002366, #0047ab, #1e90ff);
+    background: linear-gradient(135deg, #002366, #0047ab, #1e90ff, #00c896, #4caf50);
+    background-size: 300% 300%;
+    animation: gradientMove 12s ease infinite;
     color: white;
     text-align: center;
+}
+
+/* Animation du dégradé */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(135deg, #0047ab, #1e90ff);
+    background: rgba(0, 0, 0, 0.25);
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-}
-
 .logo {
-    height: 90px; /* logo plus gros */
+    height: 90px;
     object-fit: contain;
 }
 
-/* Bouton vitreux (glassmorphism) */
+/* Bouton vitreux (connexion) */
 .login-btn {
     padding: 12px 25px;
     border-radius: 15px;
@@ -41,10 +45,6 @@ body {
 }
 
 .login-btn:hover {
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(0, 200, 150, 0.4); /* vert au survol */
     transform: scale(1.05);
-}
-
-.content {
-    padding: 50px;
 }
