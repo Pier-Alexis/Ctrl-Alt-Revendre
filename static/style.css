@@ -1,11 +1,22 @@
+/* --- FOND GLOBAL --- */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+}
+
+/* Fond animé UNIQUEMENT sur la page d’accueil */
+body.homepage {
     background: linear-gradient(135deg, #002366, #0047ab, #1e90ff, #00c896, #4caf50);
     background-size: 300% 300%;
     animation: gradientMove 12s ease infinite;
-    color: white;
-    text-align: center;
+}
+
+/* Fond statique (login et dashboard) */
+body.otherpage {
+    background: linear-gradient(135deg, #002366, #0047ab, #1e90ff, #00c896, #4caf50);
+    background-size: cover;
 }
 
 /* Animation du dégradé du fond */
@@ -20,7 +31,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(135deg, #0047ab, #1e90ff); /* UNIQUEMENT bleu */
+    background: linear-gradient(135deg, #0047ab, #1e90ff);
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
@@ -45,12 +56,20 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
+/* Animation au survol */
 .login-btn:hover {
-    background: rgba(0, 200, 150, 0.4); /* vert au survol */
-    transform: scale(1.05);
+    background: rgba(0, 200, 150, 0.4);
+    transform: scale(1.07);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
-/* --- Formulaire vitreux --- */
+/* Animation au clic */
+.login-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* --- FORMULAIRE VITREUX --- */
 .login-box {
     max-width: 350px;
     margin: 80px auto;
