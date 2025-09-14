@@ -49,3 +49,50 @@ body {
     background: rgba(0, 200, 150, 0.4); /* vert au survol */
     transform: scale(1.05);
 }
+
+/* --- Formulaire vitreux --- */
+.login-box {
+    max-width: 350px;
+    margin: 80px auto;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    color: white;
+}
+
+.login-box h2 {
+    margin-bottom: 20px;
+    color: #e0f7e9;
+}
+
+.login-box input {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+.login-box button {
+    margin-top: 15px;
+    padding: 12px 25px;
+    border-radius: 15px;
+    border: none;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #0047ab, #00c896);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.login-box button:hover {
+    transform: scale(1.05);
+}
