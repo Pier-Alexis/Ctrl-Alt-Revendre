@@ -8,18 +8,19 @@ body {
     text-align: center;
 }
 
-/* Animation du dégradé */
+/* Animation du dégradé du fond */
 @keyframes gradientMove {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
+/* --- BARRE DU HAUT --- */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(0, 0, 0, 0.25);
+    background: linear-gradient(135deg, #0047ab, #1e90ff); /* UNIQUEMENT bleu */
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
@@ -29,7 +30,7 @@ body {
     object-fit: contain;
 }
 
-/* Bouton vitreux (connexion) */
+/* --- BOUTON VITREUX --- */
 .login-btn {
     padding: 12px 25px;
     border-radius: 15px;
