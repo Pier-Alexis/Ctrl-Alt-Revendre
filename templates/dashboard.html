@@ -1,1 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard - Ctrl+Alt+ReVendre</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="logo">
+    </div>
+    <div style="padding-right:20px;">
+      <a href="{{ url_for('logout') }}" class="login-btn">Se déconnecter</a>
+    </div>
+  </header>
+
+  <main class="content">
+    <div class="table-container">
+      <h2 style="padding:20px; color: #e0f7e9">Bienvenue, {{ user }} !</h2>
+      <p style="padding-bottom:20px">Ici tu pourras ajouter/modifier les PC (on code ça juste après).</p>
+    </div>
+  </main>
+</body>
+</html>
 
