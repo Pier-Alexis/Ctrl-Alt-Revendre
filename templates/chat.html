@@ -1,36 +1,47 @@
+<!-- templates/chat.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Chat - Ctrl+Alt+ReVendre</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="utf-8">
+  <title>Chat - Ctrl+Alt+ReVendre</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<header class="header">
-    <div class="logo-container">
+  <header class="header">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center">
+      <div style="display:flex;align-items:center;gap:18px">
         <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="logo">
+        <div style="color:#e0f7e9">Chat</div>
+      </div>
+      <div>
+        <a href="{{ url_for('index') }}" class="btn">Accueil</a>
+        <a href="{{ url_for('logout') }}" class="btn">Se déconnecter</a>
+      </div>
     </div>
-    <div style="padding-right:20px;">
-        <a href="{{ url_for('dashboard') }}" class="login-btn">Dashboard</a>
-        <a href="{{ url_for('logout') }}" class="login-btn">Se déconnecter</a>
-    </div>
-</header>
+  </header>
 
-<main class="content">
-    <div class="chat-box">
-        <h2>Chat des acheteurs</h2>
-        <div class="messages">
-            {% for msg in messages %}
-            <div class="message">
-                <strong>{{ msg.user }}:</strong> {{ msg.msg }}
-            </div>
-            {% endfor %}
-        </div>
-        <form method="POST" class="chat-form">
-            <input type="text" name="message" placeholder="Tapez votre message..." required>
-            <button type="submit">Envoyer</button>
-        </form>
+  <div class="container">
+    <div class="panel chat-box">
+      <h3>Conversation</h3>
+      <div id="messages" class="messages"></div>
+
+      <form id="send-form" class="form-inline" onsubmit="return false;">
+        <input id="msg-input" placeholder="Tapez votre message..." />
+        <button id="send-btn" class="btn">Envoyer</button>
+      </form>
     </div>
-</main>
+  </div>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+  <script>
+    // bind send form for buyers
+    document.getElementById('send-form').addEventListener('submit', async (ev)=>{
+      ev.preventDefault();
+      const input = document.getElementById('msg-input');
+      if(!input.value.trim()) return;
+      await fetch('/api/chat/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:input.value.trim()})});
+      input.value=''; setTimeout(()=>window.location.reload(),300);
+    });
+  </script>
 </body>
 </html>
