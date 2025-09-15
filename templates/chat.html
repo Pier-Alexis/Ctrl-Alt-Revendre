@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat - Ctrl+Alt+ReVendre</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .chat-box { max-width: 600px; margin: 50px auto; background: rgba(255,255,255,0.15); padding: 20px; border-radius: 15px; backdrop-filter: blur(10px); }
+    .message { padding: 10px; margin-bottom: 8px; border-radius: 8px; }
+    .from-user { background-color: rgba(0,200,150,0.4); color: black; text-align: left; }
+    .from-admin { background-color: rgba(0,0,200,0.4); color: white; text-align: right; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="logo">
+    </div>
+    <div style="padding-right:20px;">
+      <a href="{{ url_for('dashboard') }}" class="login-btn">Retour</a>
+    </div>
+  </header>
+
+  <main class="content">
+    <div class="chat-box">
+      <h2>Chat</h2>
+      <div>
+        {% for c in chats %}
+          <div class="message {% if c.from == user %}from-user{% else %}from-admin{% endif %}">
+            <strong>{{ c.from }}:</strong> {{ c.message }}
+          </div>
+        {% endfor %}
+      </div>
+      <form method="POST">
+        <input type="text" name="message" placeholder="Écrire un message..." required style="width:80%; padding:10px;">
+        <button type="submit" style="padding:10px 20px;">Envoyer</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
