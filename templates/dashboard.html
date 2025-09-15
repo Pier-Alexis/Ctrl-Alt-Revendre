@@ -18,35 +18,51 @@
   <main class="content">
     <h2 style="padding:20px; color: #e0f7e9">Bienvenue, {{ user }} !</h2>
 
-    <div class="table-container">
-      <h3>Ordinateurs disponibles</h3>
-      <a href="{{ url_for('edit_pc') }}" class="login-btn">Ajouter un PC</a>
-      <table>
-        <tr>
-          <th>ID</th>
-          <th>Nom</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-        {% for pc in pcs %}
-        <tr>
-          <td>{{ pc.id }}</td>
-          <td>{{ pc.name }}</td>
-          <td>{{ pc.status }}</td>
-          <td><a href="{{ url_for('edit_pc', id=pc.id) }}" class="login-btn">Modifier</a></td>
-        </tr>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
         {% endfor %}
-      </table>
-    </div>
+      {% endif %}
+    {% endwith %}
 
     <div class="table-container">
-      <h3>Gestion des utilisateurs admin</h3>
-      <a href="{{ url_for('admin_users') }}" class="login-btn">Modifier mots de passe admin</a>
-    </div>
+        <h3>Ordinateurs disponibles</h3>
+        <table>
+            <tr>
+                <th>Nom</th>
+                <th>Status</th>
+            </tr>
+            {% for pc in pcs %}
+            <tr>
+                <td>{{ pc.name }}</td>
+                <td>{{ pc.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
 
-    <div class="table-container">
-      <h3>Chat avec acheteurs</h3>
-      <a href="{{ url_for('chat') }}" class="login-btn">Ouvrir le chat</a>
+        <h3>Ajouter un PC</h3>
+        <form method="POST">
+            <input type="hidden" name="action" value="add_pc">
+            <input type="text" name="name" placeholder="Nom du PC" required>
+            <input type="text" name="status" placeholder="Statut" required>
+            <button type="submit">Ajouter</button>
+        </form>
+
+        <h3>Changer mot de passe</h3>
+        <form method="POST">
+            <input type="hidden" name="action" value="change_password">
+            <select name="target_user" required>
+                {% for admin in admins %}
+                    <option value="{{ admin }}">{{ admin }} (Admin)</option>
+                {% endfor %}
+                {% for user in users %}
+                    <option value="{{ user }}">{{ user }} (Acheteur)</option>
+                {% endfor %}
+            </select>
+            <input type="text" name="new_password" placeholder="Nouveau mot de passe" required>
+            <button type="submit">Changer</button>
+        </form>
     </div>
   </main>
 </body>
