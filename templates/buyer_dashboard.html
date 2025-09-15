@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard - Ctrl+Alt+ReVendre</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="logo">
+    </div>
+    <div style="padding-right:20px;">
+      <a href="{{ url_for('logout') }}" class="login-btn">Se déconnecter</a>
+    </div>
+  </header>
+
+  <main class="content">
+    <h2 style="padding:20px; color: #e0f7e9">Bienvenue, {{ user }} !</h2>
+
+    <div class="table-container">
+      <h3>Ordinateurs disponibles</h3>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Status</th>
+        </tr>
+        {% for pc in pcs %}
+        <tr>
+          <td>{{ pc.id }}</td>
+          <td>{{ pc.name }}</td>
+          <td>{{ pc.status }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="table-container">
+      <h3>Chat avec admins</h3>
+      <a href="{{ url_for('chat') }}" class="login-btn">Ouvrir le chat</a>
+    </div>
+  </main>
+</body>
+</html>
