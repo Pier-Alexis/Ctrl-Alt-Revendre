@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Users - Ctrl+Alt+ReVendre</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="logo">
+    </div>
+    <div style="padding-right:20px;">
+      <a href="{{ url_for('dashboard') }}" class="login-btn">Retour</a>
+    </div>
+  </header>
+
+  <main class="content">
+    <div class="table-container">
+      <h2>Modifier mots de passe admin</h2>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <table>
+        <tr>
+          <th>Nom d'utilisateur</th>
+          <th>Action</th>
+        </tr>
+        {% for u in users %}
+          {% if u.role == 'admin' %}
+          <tr>
+            <td>{{ u.username }}</td>
+            <td>
+              <form method="POST" style="display:inline;">
+                <input type="hidden" name="username" value="{{ u.username }}">
+                <input type="text" name="new_password" placeholder="Nouveau mot de passe" required>
+                <button type="submit">Changer</button>
+              </form>
+            </td>
+          </tr>
+          {% endif %}
+        {% endfor %}
+      </table>
+    </div>
+  </main>
+</body>
+</html>
