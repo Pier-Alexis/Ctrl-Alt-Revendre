@@ -16,76 +16,25 @@
   </header>
 
   <main class="content">
-    <h2 style="padding:20px; color: #e0f7e9">Bienvenue, {{ user }} !</h2>
+    <div class="table-container">
+      <h2 style="padding:20px; color: #e0f7e9">Bienvenue, {{ user }} !</h2>
+      <p style="padding-bottom:20px">Ici tu pourras ajouter/modifier les PC.</p>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-          <div class="flash {{ category }}">{{ message }}</div>
+      <table>
+        <tr>
+          <th>Nom PC</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+        {% for pc in pcs %}
+        <tr>
+          <td>{{ pc.name }}</td>
+          <td>{{ pc.status }}</td>
+          <td><button>Editer</button></td>
+        </tr>
         {% endfor %}
-      {% endif %}
-    {% endwith %}
-
-    <div class="table-container" style="background: rgba(255,255,255,0.1); padding:20px; border-radius:15px; backdrop-filter:blur(10px);">
-
-        <h3>Ordinateurs disponibles</h3>
-        <table>
-            <tr>
-                <th>Nom</th>
-                <th>Status</th>
-            </tr>
-            {% for pc in pcs %}
-            <tr>
-                <td>{{ pc.name }}</td>
-                <td>{{ pc.status }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-
-        <h3>Ajouter un PC</h3>
-        <form method="POST">
-            <input type="hidden" name="action" value="add_pc">
-            <input type="text" name="name" placeholder="Nom du PC" required>
-            <input type="text" name="status" placeholder="Statut" required>
-            <button type="submit">Ajouter</button>
-        </form>
-
-        <h3>Changer mot de passe</h3>
-        <form method="POST">
-            <input type="hidden" name="action" value="change_password">
-            <select name="target_user" required>
-                {% for admin in admins %}
-                    <option value="{{ admin }}">{{ admin }} (Admin)</option>
-                {% endfor %}
-                {% for user in users %}
-                    <option value="{{ user }}">{{ user }} (Acheteur)</option>
-                {% endfor %}
-            </select>
-            <input type="text" name="new_password" placeholder="Nouveau mot de passe" required>
-            <button type="submit">Changer</button>
-        </form>
-
-        <h3>Messages utilisateurs (non pris)</h3>
-        {% for user, msgs in chat_messages.items() %}
-            {% if msgs %}
-                <div style="margin-bottom:15px;">
-                    <strong>{{ user }} :</strong>
-                    {% for msg in msgs %}
-                        <div class="flash" style="margin:5px; padding:5px; border-radius:10px; background:rgba(255,255,255,0.2);">
-                            {{ msg.message }} <small>{{ msg.time }}</small>
-                            <form method="POST" style="display:inline;">
-                                <input type="hidden" name="action" value="take_message">
-                                <input type="hidden" name="username" value="{{ user }}">
-                                <input type="hidden" name="msg_index" value="{{ loop.index0 }}">
-                                <button type="submit" style="padding:3px 8px; border-radius:5px; font-size:12px; background:rgba(0,200,150,0.5);">Prendre</button>
-                            </form>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endfor %}
+      </table>
     </div>
-
   </main>
 </body>
 </html>
