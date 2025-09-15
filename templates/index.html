@@ -11,21 +11,21 @@
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Ctrl+Alt+ReVendre" class="logo">
         </div>
         <div class="login-container">
-            {% if user %}
-                <a href="{{ url_for('chat', username=user) }}" class="login-btn">Chat</a>
+            {% if session.user %}
+                <a href="/chat" class="login-btn">Chat</a>
+                <a href="/logout" class="login-btn">Se déconnecter</a>
             {% else %}
                 <a href="/login" class="login-btn">Connexion</a>
+                <a href="/register" class="login-btn">S'inscrire</a>
             {% endif %}
         </div>
     </header>
 
     <main class="content">
-        <h2>Bienvenue sur Ctrl+Alt+ReVendre</h2>
+        <h2 style="padding:20px; color:#e0f7e9">Bienvenue sur Ctrl+Alt+ReVendre</h2>
         <p>Suivi de mes vieux ordinateurs remis à neuf 🚀</p>
-        {% if not user %}
-            <p style="margin-top:15px; font-style:italic; color:#00c896;">
-                Connectez-vous pour chatter directement avec un admin et suivre vos commandes.
-            </p>
+        {% if not session.user %}
+            <p>Connectez-vous ou inscrivez-vous pour chatter avec nous et suivre vos commandes.</p>
         {% endif %}
     </main>
 </body>
