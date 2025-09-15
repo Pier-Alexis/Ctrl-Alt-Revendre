@@ -11,14 +11,15 @@
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Ctrl+Alt+ReVendre" class="logo">
         </div>
         <div class="login-container">
-            {% if session.user %}
-                <a href="/chat" class="login-btn">Chat</a>
-                <a href="/logout" class="login-btn">Se déconnecter</a>
+            {% if session.get('user') %}
+            <a href="{{ url_for('chat') }}" class="login-btn">Chat</a>
+            <a href="{{ url_for('logout') }}" class="login-btn">Se déconnecter</a>
             {% else %}
-                <a href="/login" class="login-btn">Connexion</a>
-                <a href="/register" class="login-btn">S'inscrire</a>
+            <a href="{{ url_for('login') }}" class="login-btn">Se connecter</a>
+            <a href="{{ url_for('register') }}" class="login-btn">S'inscrire</a>
             {% endif %}
         </div>
+
     </header>
 
     <main class="content">
