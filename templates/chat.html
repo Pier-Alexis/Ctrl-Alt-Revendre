@@ -6,41 +6,31 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header class="header">
-        <div class="logo-container">
-            <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="Ctrl+Alt+ReVendre">
-        </div>
-        <div style="padding-right:20px;">
-            <a href="{{ url_for('logout') }}" class="login-btn">Se déconnecter</a>
-        </div>
-    </header>
+<header class="header">
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="logo">
+    </div>
+    <div style="padding-right:20px;">
+        <a href="{{ url_for('dashboard') }}" class="login-btn">Dashboard</a>
+        <a href="{{ url_for('logout') }}" class="login-btn">Se déconnecter</a>
+    </div>
+</header>
 
-    <main class="content">
-        <h2 style="padding:20px; color:#e0f7e9">Bonjour, {{ user }} !</h2>
-
-        {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            {% for category, message in messages %}
-              <div class="flash {{ category }}">{{ message }}</div>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-
-        <div class="chat-box">
+<main class="content">
+    <div class="chat-box">
+        <h2>Chat des acheteurs</h2>
+        <div class="messages">
             {% for msg in messages %}
-                <div class="chat-message">
-                    <strong>{{ msg.from }} :</strong> {{ msg.message }}
-                    <small style="float:right;">{{ msg.time }}</small>
-                </div>
-            {% else %}
-                <p>Aucun message pour l'instant.</p>
+            <div class="message">
+                <strong>{{ msg.user }}:</strong> {{ msg.msg }}
+            </div>
             {% endfor %}
         </div>
-
-        <form method="POST">
-            <input type="text" name="message" class="chat-input" placeholder="Tapez votre message..." required>
-            <button type="submit" style="margin-top:10px;">Envoyer</button>
+        <form method="POST" class="chat-form">
+            <input type="text" name="message" placeholder="Tapez votre message..." required>
+            <button type="submit">Envoyer</button>
         </form>
-    </main>
+    </div>
+</main>
 </body>
 </html>
