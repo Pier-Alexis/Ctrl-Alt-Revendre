@@ -1,206 +1,203 @@
-/* --- FOND GLOBAL --- */
+/* --- GLOBAL --- */
 body {
     margin: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
-    color: white;
-    text-align: center;
-    min-height: 100vh;
-}
-
-/* Fond animé UNIQUEMENT sur la page d’accueil */
-body.homepage {
+    font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #002366, #0047ab, #1e90ff, #00c896, #4caf50);
     background-size: 300% 300%;
     animation: gradientMove 12s ease infinite;
+    color: white;
+    text-align: center;
 }
 
-/* Fond statique (login et dashboard) : même palette mais fixe */
-body.otherpage {
-    background: linear-gradient(135deg, #002366, #0047ab, #1e90ff, #00c896, #4caf50);
-    background-size: cover;
-}
-
-/* Animation du dégradé du fond */
+/* Animation du dégradé */
 @keyframes gradientMove {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* --- BARRE DU HAUT --- */
+/* --- HEADER --- */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(135deg, #0047ab, #1e90ff); /* fixed blue header */
-    padding: 20px 32px;
+    background: linear-gradient(135deg, #0047ab, #1e90ff); /* UNIQUEMENT bleu fixe */
+    padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    position: relative;
-    z-index: 10;
 }
 
 .logo {
-    height: 90px;
+    height: 110px; /* plus gros logo */
     object-fit: contain;
 }
 
-/* --- BOUTON VITREUX --- */
-.login-btn, .btn {
-    display: inline-block;
-    padding: 12px 22px;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.16);
+/* --- BOUTONS VITREUX --- */
+.login-btn {
+    padding: 12px 25px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
     text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
     cursor: pointer;
 }
 
-/* Hover : légère montée + vert */
-.login-btn:hover, .btn:hover {
-    transform: translateY(-6px) scale(1.02);
-    background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.12));
-    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+/* Hover et click */
+.login-btn:hover {
+    background: rgba(0, 200, 150, 0.4); /* vert sur hover */
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
 }
 
-/* Clic : effet "press" */
-.login-btn:active, .btn:active {
-    transform: translateY(0) scale(0.98);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+.login-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.25);
 }
 
-/* small utility */
-.container {
-    width: 92%;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-/* --- CONTENT --- */
-.content {
-    padding: 40px 20px 80px 20px;
-}
-
-/* --- TABLE / CARDS --- */
-.table-container {
-    width: 90%;
-    max-width: 1000px;
-    margin: 30px auto 80px auto;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    color: white;
-}
-
-.table-header {
-    display: grid;
-    grid-template-columns: 60px 1fr 180px 140px;
-    gap: 0;
-    align-items: center;
-    padding: 12px 18px;
-    background: rgba(255,255,255,0.9);
-    color: #0047ab;
-    font-weight: 700;
-}
-
-.table-row {
-    display: grid;
-    grid-template-columns: 60px 1fr 180px 140px;
-    gap: 0;
-    align-items: center;
-    padding: 14px 18px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-}
-
-.table-row:nth-child(even) {
-    background: rgba(255,255,255,0.02);
-}
-
-/* actions */
-.row-actions {
-    display: flex;
-    gap: 8px;
-    justify-content: flex-end;
-}
-
-.small-btn {
-    padding: 8px 12px;
-    border-radius: 10px;
-    font-size: 14px;
-}
-
-/* --- FORMULAIRES & LOGIN BOX --- */
+/* --- Formulaires vitreux --- */
 .login-box {
-    max-width: 420px;
-    margin: 50px auto;
-    padding: 28px;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.12);
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     text-align: center;
     color: white;
-    animation: appearUp 0.5s ease;
+    transition: all 0.3s ease-in-out;
 }
 
-.form-field {
-    width: 100%;
-    margin: 10px 0;
+.login-box:hover {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
 }
 
-.form-field input, .form-field textarea {
-    width: 96%;
+.login-box h2 {
+    margin-bottom: 20px;
+    color: #e0f7e9;
+}
+
+.login-box input {
+    width: 90%;
     padding: 12px;
+    margin: 10px 0;
     border-radius: 10px;
     border: none;
     outline: none;
-    background: rgba(255,255,255,0.95);
+    background: rgba(255, 255, 255, 0.8);
     font-size: 14px;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* add button style */
-.add-button {
-    margin-top: 12px;
+.login-box input:focus {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.login-box button {
+    margin-top: 15px;
+    padding: 12px 25px;
+    border-radius: 15px;
+    border: none;
+    font-weight: bold;
+    color: white;
     background: linear-gradient(135deg, #0047ab, #00c896);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-/* small messages */
+.login-box button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
+}
+
+.login-box button:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.25);
+}
+
+/* --- TABLES --- */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid rgba(255,255,255,0.3);
+    text-align: center;
+    border-radius: 5px;
+}
+
+th {
+    background-color: rgba(0,0,200,0.5);
+}
+
+td {
+    background-color: rgba(0,200,150,0.2);
+}
+
+tr:hover td {
+    background-color: rgba(0,200,150,0.4);
+}
+
+/* --- CHAT --- */
+.chat-box {
+    max-width: 600px;
+    margin: 50px auto;
+    background: rgba(255,255,255,0.15);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.message {
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+}
+
+.from-user {
+    background-color: rgba(0,200,150,0.4);
+    color: black;
+    text-align: left;
+}
+
+.from-admin {
+    background-color: rgba(0,0,200,0.4);
+    color: white;
+    text-align: right;
+}
+
+/* --- FLASH MESSAGES --- */
 .flash {
-    padding: 10px 14px;
+    margin: 10px 0;
+    padding: 10px;
     border-radius: 10px;
-    margin-bottom: 10px;
-}
-.flash.success { background: rgba(0,200,120,0.15); color: #eafff0; border: 1px solid rgba(0,200,120,0.25); }
-.flash.error   { background: rgba(255,80,80,0.12); color: #ffecec; border: 1px solid rgba(255,80,80,0.18); }
-.flash.info    { background: rgba(255,255,255,0.06); color: #f0f8ff; border: 1px solid rgba(255,255,255,0.06); }
-
-/* --- Animations --- */
-@keyframes appearUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
 }
 
-/* responsive */
-@media (max-width: 800px) {
-    .table-header, .table-row {
-        grid-template-columns: 50px 1fr;
-        grid-auto-rows: auto;
-        row-gap: 8px;
-    }
-    .row-actions { justify-content: flex-start; }
-    .logo { height: 72px; }
+.flash.error {
+    background-color: rgba(255, 0, 0, 0.4);
+}
+
+.flash.success {
+    background-color: rgba(0, 200, 0, 0.4);
+}
+
+/* --- MINOR STYLING --- */
+.content h2, .content h3 {
+    margin-top: 20px;
+    color: #e0f7e9;
+}
+
+.table-container {
+    margin: 30px auto;
 }
