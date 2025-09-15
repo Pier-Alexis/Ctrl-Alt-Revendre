@@ -2,37 +2,28 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Créer un compte - Ctrl+Alt+ReVendre</title>
+    <title>Inscription - Ctrl+Alt+ReVendre</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header class="header">
-        <div class="logo-container">
-            <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="Ctrl+Alt+ReVendre">
-        </div>
-        <div class="login-container">
-            <a href="/login" class="login-btn">Connexion</a>
-        </div>
-    </header>
+<header class="header">
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="logo">
+    </div>
+    <div style="padding-right:20px;">
+        <a href="{{ url_for('login') }}" class="login-btn">Connexion</a>
+    </div>
+</header>
 
-    <main class="content">
-        <div class="login-box">
-            <h2>Créer un compte</h2>
-
-            {% with messages = get_flashed_messages(with_categories=true) %}
-              {% if messages %}
-                {% for category, message in messages %}
-                  <div class="flash {{ category }}">{{ message }}</div>
-                {% endfor %}
-              {% endif %}
-            {% endwith %}
-
-            <form method="POST">
-                <input type="text" name="username" placeholder="Nom d'utilisateur" required>
-                <input type="password" name="password" placeholder="Mot de passe" required>
-                <button type="submit">S'inscrire</button>
-            </form>
-        </div>
-    </main>
+<main class="content">
+    <div class="login-box">
+        <h2>Créer un compte</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+            <input type="password" name="password" placeholder="Mot de passe" required>
+            <button type="submit">S'inscrire</button>
+        </form>
+    </div>
+</main>
 </body>
 </html>
