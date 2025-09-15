@@ -1,37 +1,30 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>Modifier PC - Ctrl+Alt+ReVendre</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+  <title>{% if pc %}Modifier{% else %}Ajouter{% endif %} PC - Ctrl+Alt+ReVendre</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="otherpage">
+<body>
   <header class="header">
-    <div class="logo-container container">
+    <div class="logo-container">
       <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="logo">
     </div>
     <div style="padding-right:20px;">
-      <a href="{{ url_for('logout') }}" class="login-btn">Se déconnecter</a>
+      <a href="{{ url_for('dashboard') }}" class="login-btn">Retour</a>
     </div>
   </header>
 
-  <main class="content container">
-    <div class="login-box" style="max-width:720px; margin:30px auto;">
-      <h2>Modifier PC #{{ pc.id }}</h2>
-
+  <main class="content">
+    <div class="login-box">
+      <h2>{% if pc %}Modifier{% else %}Ajouter{% endif %} PC</h2>
       <form method="POST">
-        <div style="display:flex; gap:12px; flex-direction:column;">
-          <input name="modele" value="{{ pc.modele }}" placeholder="Modèle (ex: Dell Optiplex 7010)" required>
-          <input name="composants" value="{{ pc.composants }}" placeholder="Composants (CPU, RAM, SSD...)">
-          <input name="etat" value="{{ pc.etat }}" placeholder="État (ex: Reçu / Nettoyage / Optimisation / Prêt / Vendu)">
-          <textarea name="notes" rows="4" placeholder="Notes supplémentaires">{{ pc.notes }}</textarea>
-
-          <div style="display:flex; gap:10px; justify-content:flex-end;">
-            <a href="{{ url_for('dashboard') }}" class="btn">Annuler</a>
-            <button type="submit" class="btn add-button">Sauvegarder</button>
-          </div>
-        </div>
+        <input type="text" name="name" placeholder="Nom du PC" value="{{ pc.name if pc else '' }}" required>
+        <input type="text" name="status" placeholder="Status" value="{{ pc.status if pc else '' }}" required>
+        {% if pc %}
+          <input type="hidden" name="id" value="{{ pc.id }}">
+        {% endif %}
+        <button type="submit">Sauvegarder</button>
       </form>
     </div>
   </main>
