@@ -1,3 +1,4 @@
+<!-- templates/dashboard.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,43 +7,83 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<header class="header">
-    <div class="logo-container">
+  <header class="header">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center">
+      <div style="display:flex;align-items:center;gap:18px">
         <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="logo">
+        <div style="color:#e0f7e9">Dashboard</div>
+      </div>
+      <div>
+        <a href="{{ url_for('index') }}" class="btn">Accueil</a>
+        <a href="{{ url_for('logout') }}" class="btn">Se déconnecter</a>
+        <span id="chat-badge" style="display:none"></span>
+      </div>
     </div>
-    <div style="padding-right:20px;">
-        <a href="{{ url_for('logout') }}" class="login-btn">Se déconnecter</a>
-        <a href="{{ url_for('change_password') }}" class="login-btn">Changer mot de passe</a>
-        <a href="{{ url_for('chat') }}" class="login-btn">Chat</a>
-    </div>
-</header>
+  </header>
 
-<main class="content">
-    <div class="table-container">
-        <h2 style="padding:20px; color: #e0f7e9">Bienvenue, {{ user }} !</h2>
-        <p style="padding-bottom:20px">Ici tu peux ajouter/modifier les PC.</p>
+  <div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for cat,msg in messages %}
+        <div class="panel">{{ msg }}</div>
+      {% endfor %}
+    {% endwith %}
 
-        <!-- Ajouter PC -->
-        <form method="POST" style="margin-bottom:20px;">
-            <input type="text" name="pc_name" placeholder="Nom du PC" required>
-            <input type="text" name="pc_status" placeholder="Statut" required>
-            <button type="submit">Ajouter PC</button>
-        </form>
+    <div class="grid">
+      <!-- left: PCs + add -->
+      <div>
+        <div class="panel">
+          <h3>Ordinateurs</h3>
+          <table class="table">
+            <thead><tr><th>Nom</th><th>Statut</th><th>Actions</th></tr></thead>
+            <tbody>
+              {% for p in pcs %}
+              <tr>
+                <td>{{ p.name }}</td>
+                <td>{{ p.status }}</td>
+                <td>
+                  <form method="POST" action="{{ url_for('delete_pc', pc_id=p.id) }}" style="display:inline">
+                    <button class="btn" type="submit">Supprimer</button>
+                  </form>
+                  <a class="btn" href="{{ url_for('edit_pc', pc_id=p.id) }}">Modifier</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <hr>
+          <h4>Ajouter un PC</h4>
+          <form method="POST" action="{{ url_for('add_pc') }}" class="form-inline">
+            <input name="name" placeholder="Nom du PC" required>
+            <input name="status" placeholder="Statut" required>
+            <button type="submit" class="btn">Ajouter</button>
+          </form>
+        </div>
+      </div>
 
-        <!-- Tableau des PC -->
-        <table>
-            <tr>
-                <th>Nom PC</th>
-                <th>Statut</th>
-            </tr>
-            {% for pc in pcs %}
-            <tr>
-                <td>{{ pc.name }}</td>
-                <td>{{ pc.status }}</td>
-            </tr>
+      <!-- right: conversations -->
+      <div>
+        <div class="panel">
+          <h3>Conversations (non prises)</h3>
+          <div id="conv-list">
+            {% for c in chats_summary %}
+              <div class="conv-item">
+                <strong>{{ c.user }}</strong>
+                <span class="small"> - {{ c.unassigned_count }} non pris</span>
+                <div class="small">Ouvrir: <a class="btn" href="{{ url_for('chat') }}?u={{ c.user }}">Chat</a></div>
+              </div>
             {% endfor %}
-        </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h4>Prendre une conversation (admin)</h4>
+          <p class="small">Cliquez sur une conversation dans la liste pour l'ouvrir, puis utilisez "Prendre" sur un message.</p>
+          <div class="small">Rafraîchissement automatique toutes les 3s.</div>
+        </div>
+      </div>
     </div>
-</main>
+  </div>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
