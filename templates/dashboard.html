@@ -26,7 +26,8 @@
       {% endif %}
     {% endwith %}
 
-    <div class="table-container">
+    <div class="table-container" style="background: rgba(255,255,255,0.1); padding:20px; border-radius:15px; backdrop-filter:blur(10px);">
+
         <h3>Ordinateurs disponibles</h3>
         <table>
             <tr>
@@ -63,7 +64,28 @@
             <input type="text" name="new_password" placeholder="Nouveau mot de passe" required>
             <button type="submit">Changer</button>
         </form>
+
+        <h3>Messages utilisateurs (non pris)</h3>
+        {% for user, msgs in chat_messages.items() %}
+            {% if msgs %}
+                <div style="margin-bottom:15px;">
+                    <strong>{{ user }} :</strong>
+                    {% for msg in msgs %}
+                        <div class="flash" style="margin:5px; padding:5px; border-radius:10px; background:rgba(255,255,255,0.2);">
+                            {{ msg.message }} <small>{{ msg.time }}</small>
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="action" value="take_message">
+                                <input type="hidden" name="username" value="{{ user }}">
+                                <input type="hidden" name="msg_index" value="{{ loop.index0 }}">
+                                <button type="submit" style="padding:3px 8px; border-radius:5px; font-size:12px; background:rgba(0,200,150,0.5);">Prendre</button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
+
   </main>
 </body>
 </html>
