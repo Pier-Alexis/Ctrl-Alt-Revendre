@@ -10,11 +10,15 @@
         <div class="logo-container">
             <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="Ctrl+Alt+ReVendre">
         </div>
+        <div class="login-container">
+            <a href="/login" class="login-btn">Connexion</a>
+        </div>
     </header>
 
     <main class="content">
         <div class="login-box">
             <h2>Créer un compte</h2>
+
             {% with messages = get_flashed_messages(with_categories=true) %}
               {% if messages %}
                 {% for category, message in messages %}
@@ -22,14 +26,12 @@
                 {% endfor %}
               {% endif %}
             {% endwith %}
+
             <form method="POST">
                 <input type="text" name="username" placeholder="Nom d'utilisateur" required>
                 <input type="password" name="password" placeholder="Mot de passe" required>
                 <button type="submit">S'inscrire</button>
             </form>
-            <p style="margin-top:15px;">
-                Déjà un compte ? <a href="{{ url_for('login') }}" style="color:#00c896;">Se connecter</a>
-            </p>
         </div>
     </main>
 </body>
