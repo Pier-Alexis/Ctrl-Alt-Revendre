@@ -2,32 +2,76 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Ctrl+Alt+ReVendre</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madows - Accueil</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="header">
-        <div class="logo-container">
-            <img src="{{ url_for('static', filename='logo.png') }}" alt="Ctrl+Alt+ReVendre" class="logo">
+    <!-- Bannière -->
+    <header>
+        <div class="logo">
+            <h1>Madows</h1>
         </div>
-        <div class="login-container">
-            {% if session.get('user') %}
-            <a href="{{ url_for('chat') }}" class="login-btn">Chat</a>
-            <a href="{{ url_for('logout') }}" class="login-btn">Se déconnecter</a>
-            {% else %}
-            <a href="{{ url_for('login') }}" class="login-btn">Se connecter</a>
-            <a href="{{ url_for('register') }}" class="login-btn">S'inscrire</a>
-            {% endif %}
+        <div class="auth-links">
+            <a href="login.html">Se connecter</a>
+            <a href="register.html">S'inscrire</a>
         </div>
-
     </header>
 
-    <main class="content">
-        <h2 style="padding:20px; color:#e0f7e9">Bienvenue sur Ctrl+Alt+ReVendre</h2>
-        <p>Suivi de mes vieux ordinateurs remis à neuf 🚀</p>
-        {% if not session.user %}
-            <p>Connectez-vous ou inscrivez-vous pour chatter avec nous et suivre vos commandes.</p>
-        {% endif %}
+    <!-- Contenu principal -->
+    <main>
+        <h2>Catalogue des PCs</h2>
+        <p>Découvrez nos modèles disponibles</p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom du PC</th>
+                        <th>Processeur</th>
+                        <th>Mémoire RAM</th>
+                        <th>Stockage</th>
+                        <th>Prix</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Madows Pro X</td>
+                        <td>Intel i7</td>
+                        <td>16 Go</td>
+                        <td>512 Go SSD</td>
+                        <td>1499 $</td>
+                        <td>
+                            <button class="btn">Modifier</button>
+                            <button class="btn">Supprimer</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Madows Air Lite</td>
+                        <td>AMD Ryzen 5</td>
+                        <td>8 Go</td>
+                        <td>256 Go SSD</td>
+                        <td>899 $</td>
+                        <td>
+                            <button class="btn">Modifier</button>
+                            <button class="btn">Supprimer</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Madows Gamer Xtreme</td>
+                        <td>Intel i9</td>
+                        <td>32 Go</td>
+                        <td>1 To SSD</td>
+                        <td>2299 $</td>
+                        <td>
+                            <button class="btn">Modifier</button>
+                            <button class="btn">Supprimer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </main>
 </body>
 </html>
