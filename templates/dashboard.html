@@ -6,35 +6,43 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <header class="header">
+<header class="header">
     <div class="logo-container">
-      <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="logo">
+        <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="logo">
     </div>
     <div style="padding-right:20px;">
-      <a href="{{ url_for('logout') }}" class="login-btn">Se déconnecter</a>
+        <a href="{{ url_for('logout') }}" class="login-btn">Se déconnecter</a>
+        <a href="{{ url_for('change_password') }}" class="login-btn">Changer mot de passe</a>
+        <a href="{{ url_for('chat') }}" class="login-btn">Chat</a>
     </div>
-  </header>
+</header>
 
-  <main class="content">
+<main class="content">
     <div class="table-container">
-      <h2 style="padding:20px; color: #e0f7e9">Bienvenue, {{ user }} !</h2>
-      <p style="padding-bottom:20px">Ici tu pourras ajouter/modifier les PC.</p>
+        <h2 style="padding:20px; color: #e0f7e9">Bienvenue, {{ user }} !</h2>
+        <p style="padding-bottom:20px">Ici tu peux ajouter/modifier les PC.</p>
 
-      <table>
-        <tr>
-          <th>Nom PC</th>
-          <th>Statut</th>
-          <th>Actions</th>
-        </tr>
-        {% for pc in pcs %}
-        <tr>
-          <td>{{ pc.name }}</td>
-          <td>{{ pc.status }}</td>
-          <td><button>Editer</button></td>
-        </tr>
-        {% endfor %}
-      </table>
+        <!-- Ajouter PC -->
+        <form method="POST" style="margin-bottom:20px;">
+            <input type="text" name="pc_name" placeholder="Nom du PC" required>
+            <input type="text" name="pc_status" placeholder="Statut" required>
+            <button type="submit">Ajouter PC</button>
+        </form>
+
+        <!-- Tableau des PC -->
+        <table>
+            <tr>
+                <th>Nom PC</th>
+                <th>Statut</th>
+            </tr>
+            {% for pc in pcs %}
+            <tr>
+                <td>{{ pc.name }}</td>
+                <td>{{ pc.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
-  </main>
+</main>
 </body>
 </html>
